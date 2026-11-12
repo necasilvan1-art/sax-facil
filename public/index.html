@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sax Fácil — toque sax alto sem ler partitura</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎷 Sax Fácil</h1>
+    <p>Para iniciantes no sax alto: escolha a música, veja as teclas e toque junto.</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="player" role="tab">🎵 Tocar</button>
+    <button class="tab" data-tab="chart" role="tab">📖 Todas as digitações</button>
+    <button class="tab" data-tab="chat" role="tab">💬 Professor</button>
+  </nav>
+
+  <main>
+    <!-- ===== ABA PLAYER ===== -->
+    <section id="tab-player" class="tab-panel active">
+      <div class="panel import-panel">
+        <h2>1. Importe sua música</h2>
+        <p class="hint">
+          Escreva as notas separadas por espaço, usando nomes como <code>Dó4 Ré4 Mi4</code> ou <code>C4 D4 E4</code>.
+          Para a duração, use <code>:número</code> (ex.: <code>Sol4:2</code> = 2 batidas). Pausa: <code>Pausa:1</code>.
+        </p>
+        <textarea id="song-input" rows="4" spellcheck="false">Dó4 Dó4 Ré4 Dó4 Fá4 Mi4:2 Dó4 Dó4 Ré4 Dó4 Sol4 Fá4:2 Dó4 Dó4 Dó5 Lá4 Fá4 Mi4 Ré4 Sib4 Sib4 Lá4 Fá4 Sol4 Fá4:2</textarea>
+        <div class="row">
+          <button id="btn-load" class="btn primary">Carregar notas</button>
+          <label class="btn" for="song-file">📂 Importar arquivo .txt</label>
+          <input type="file" id="song-file" accept=".txt,.text,text/plain" hidden />
+        </div>
+        <p id="player-error" class="error" hidden></p>
+        <div class="demos">
+          <span>Músicas prontas:</span>
+          <button class="btn small demo" data-demo="parabens">Parabéns pra Você</button>
+          <button class="btn small demo" data-demo="estrela">Brilha, Brilha Estrelinha</button>
+          <button class="btn small demo" data-demo="escala">Escala de Dó</button>
+        </div>
+      </div>
+
+      <div class="panel player-panel">
+        <h2>2. Veja as teclas e toque junto</h2>
+        <div class="controls">
+          <button id="btn-play" class="btn primary big">▶ Tocar</button>
+          <button id="btn-prev" class="btn">⏮ Nota anterior</button>
+          <button id="btn-next" class="btn">⏭ Próxima nota</button>
+          <label class="tempo-box">Velocidade
+            <input type="range" id="tempo" min="40" max="160" value="80" step="2" />
+            <span id="tempo-label">80 BPM</span>
+          </label>
+        </div>
+        <p id="player-status" class="hint"></p>
+
+        <div class="stage">
+          <div class="big-note">
+            <div id="big-note-name" class="big-name">—</div>
+            <div id="big-note-concert" class="big-concert"></div>
+            <div id="big-diagram" class="big-diagram"></div>
+          </div>
+          <div id="note-strip" class="note-strip"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABA TABELA ===== -->
+    <section id="tab-chart" class="tab-panel">
+      <div class="panel">
+        <h2>Todas as digitações (Sib3 até Dó#6)</h2>
+        <p class="hint">Clique em uma nota para ouvir o som e ver o diagrama grande. Teclas rosa = pressionadas.</p>
+        <div class="chart-head">
+          <div id="chart-big" class="big-diagram"></div>
+          <div>
+            <div id="chart-name" class="big-name">Clique em uma nota</div>
+            <div id="chart-concert" class="big-concert"></div>
+            <div id="chart-help" class="hint"></div>
+          </div>
+        </div>
+        <div id="chart-grid" class="chart-grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== ABA CHAT ===== -->
+    <section id="tab-chat" class="tab-panel">
+      <div class="panel chat-panel">
+        <h2>Professor Sax 💬</h2>
+        <p class="hint">Tire dúvidas sobre embocadura, respiração, ritmo ou peça dicas de músicas fáceis.</p>
+        <div id="chat-log" class="chat-log">
+          <div class="msg bot">Olá! Sou o Professor Sax. Pergunte qualquer coisa sobre o sax alto — por exemplo: <em>"como soprar corretamente?"</em> ou <em>"me ensine a nota Sol"</em>.</div>
+        </div>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" type="text" placeholder="Escreva sua pergunta..." autocomplete="off" />
+          <button class="btn primary" type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Sax Fácil · digitações padrão do sax alto (transpositor em Mi♭) · feito com a API da Mistral</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
